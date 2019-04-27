@@ -1,0 +1,42 @@
+service: NN-feedback-service
+
+provider:
+  name: openwhisk
+  runtime: nodejs:10
+  memory: 128
+
+functions:
+  prepare-entry-for-save:
+    handler: prepare-entry-for-save.main
+
+  format-entries:
+    handler: format-entries.main
+
+  set-read-input:
+    handler: set-read-input.main
+
+  save-feedback-entry-sequence:
+    sequence:
+      - prepare-entry-for-save
+      - /_/lab-feedback-db-package/create-document
+    annotations:
+      web-export: true
+    events:
+      - http:
+          method: PUT
+          path: /entries
+
+  read-feedback-entry-sequence:
+    sequence:
+      - set-read-input
+      - /_/lab-feedback-db-package/list-documents
+      - format-entries
+    annotations:
+      web-export: true
+    events:
+      - http:
+          method: GET
+          path: /entries
+
+plugins:
+  - serverless-openwhisk

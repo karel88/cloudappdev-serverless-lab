@@ -1,0 +1,14 @@
+{
+  "name": "feedback-service",
+  "version": "1.0.0",
+  "description": "Sample OpenWhisk NodeJS serverless framework service.",
+  "main": "handler.js",
+  "keywords": [
+    "serverless",
+    "openwhisk"
+  ],
+  "devDependencies": {
+    "serverless": "^1.41.1",
+    "serverless-openwhisk": ">=0.13.0"
+  }
+}
