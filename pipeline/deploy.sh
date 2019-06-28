@@ -16,8 +16,8 @@ fi
 bx fn service bind cloudantNoSQLDB ${CL_PACKAGE} --instance feedback-db-alias --keyname serverless-function-credentials
 
 # installing serverless package
-npm install
+/opt/IBM/node-v6.7/bin/npm install
 
 # deploying the serverless.yml
-npx serverless deploy -v
+/opt/IBM/node-v6.7/bin/npx serverless deploy -v
 
